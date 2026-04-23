@@ -1,19 +1,13 @@
 import { useState, useEffect } from 'react'
 import styles from './Articles.module.css'
 import { Link } from 'react-router-dom'
+import {Submission,SubmissionResponse} from '../Type.tsx'
 
-interface Ts1 {
-  id: string;
-  title: string;
-  createdAt: string;
-}
 
-interface Ts1Response {
-  posts: Ts1[];
-}
+
 
 export default function Articles() {
-  const [posts, setPosts] = useState<Ts1[]>([]);
+  const [posts, setPosts] = useState<Submission[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -21,7 +15,7 @@ export default function Articles() {
       try {
         setIsLoading(true);
         const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts");
-        const data = await res.json() as Ts1Response;
+        const data:SubmissionResponse = await res.json() ;
         setPosts(data.posts);
       } catch (error) {
         console.error("データの取得に失敗しました", error);

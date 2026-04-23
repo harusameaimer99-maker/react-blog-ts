@@ -1,24 +1,17 @@
 import { useState } from 'react';
+import { ContactForm,FormErrors } from '../Type.tsx';
 
-interface Ts3 {
-  name: string;
-  email: string;
-  message: string;
-}
 
-interface Error {
-  name?: string;
-  email?: string;
-  message?: string;
-}
+
+
 
 export default function Contact() {
-  const [form, setForm] = useState<Ts3>({ name: '', email: '', message: '' });
-  const [errors, setErrors] = useState<Error>({});
+  const [form, setForm] = useState<ContactForm>({ name: '', email: '', message: '' });
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
-    const newErrors: Error = {}; 
+    const newErrors: FormErrors = {}; 
 
     if (!form.name) newErrors.name = '名前は必須です。';
     else if (form.name.length > 30) newErrors.name = '名前は30文字以内で入力してください。';
@@ -37,12 +30,20 @@ export default function Contact() {
     e.preventDefault();
     if (!validate()) return;
 
+
+  const requestBody: ContactForm = {
+    name: form.name,
+    email: form.email,
+    message: form.message
+  };
+
+
     setIsSubmitting(true);
     try {
       const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
+        body: JSON.stringify(requestBody)
       });
 
       if (res.ok) {
