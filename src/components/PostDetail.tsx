@@ -41,7 +41,7 @@ export default function PostDetail() {
     <div>
       <h1>{post.title}</h1>
       <p>{new Date(post.createdAt).toLocaleDateString()}</p>
-      <div dangerouslySetInnerHTML={{ __html: post.content ??'' }} />
+      <div dangerouslySetInnerHTML={{ __html: post.content}} />
       <br />
       <Link to="/">記事一覧に戻る</Link>
     </div>

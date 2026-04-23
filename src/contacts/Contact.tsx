@@ -1,7 +1,11 @@
 import { useState } from 'react';
-import { ContactForm,FormErrors } from '../Type.tsx';
+import { ContactForm } from '../Type.tsx';
 
-
+interface FormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
 
 
 

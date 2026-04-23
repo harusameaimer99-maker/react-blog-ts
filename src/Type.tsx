@@ -3,7 +3,7 @@ export interface Submission {
   id: string;
   title: string;
   createdAt: string;
-  content?: string; 
+  content: string; 
 }
 
 
@@ -23,8 +23,3 @@ export interface ContactForm {
   message: string;
 }
 
-export interface FormErrors {
-  name?: string;
-  email?: string;
-  message?: string;
-}
